@@ -1,0 +1,44 @@
+{
+	"name": "Virtual FIDO U2F Token Plugin",
+	"description": "This exposes a window.u2f object to Chrome, mimicking the way the standard extension would behave with a hardware token connected.",
+	"author": "Moritz Platt",
+	"version": "0.0.1",
+	"icons": {
+		"16": "assets/icon/icon16.png",
+		"48": "assets/icon/icon48.png",
+		"128": "assets/icon/icon128.png"
+	},
+	"permissions": [
+		"<all_urls>"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"injector.js"
+			]
+		}
+	],  
+	"web_accessible_resources": [
+		"execute_in_page.js"
+	],
+	"externally_connectable": {
+		"matches": [
+			"http://127.0.0.1/*"
+		]
+	},
+	"background": {
+		"scripts": [
+			"token.js"
+		],
+		"persistent": false
+	},
+	"browser_action": {
+		"default_title": "FIDO U2F Simulation",
+		"default_icon": "assets/icon/icon48.png",
+		"default_popup": "token.html"
+	},
+	"manifest_version": 2
+}

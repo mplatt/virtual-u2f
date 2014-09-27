@@ -1,0 +1,79 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*****************************************************************************
+ *
+ * Custom CSS
+ *
+ *****************************************************************************/
+
+body {
+	font-family: sans-serif;
+	color: rgb(29, 29, 27);
+	background-color: #DCDBD6;
+}
+
+.light {
+	color: rgb(110, 110, 110);
+}
+
+#header {
+	padding: 1em;
+	text-align: center;
+}
+
+#header h1 {
+	font-weight: bold;
+	line-height: 125%;
+	font-size: 2em;
+	padding-bottom: 1em;
+}
+
+a#touch {
+	display: inline-block;
+	text-decoration: none;
+	font-weight: bold;
+	color: rgb(29, 29, 27);
+	background: url("assets/simulate.svg") no-repeat 8px 5px;
+	padding: 5px 5px 5px 45px;
+	line-height: 34px;
+	width: 135px;
+	height: 34px;
+	border: 2px solid #777;
+	border-radius: 3px;
+	background-clip: padding-box;
+	background-color: #ededed;
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
+}
+
+a#touch:hover {
+	color: rgb(227, 6, 19);
+	background-image: url("assets/simulate_hover.svg");
+}
