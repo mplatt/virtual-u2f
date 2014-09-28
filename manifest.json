@@ -31,6 +31,7 @@
 	},
 	"background": {
 		"scripts": [
+			"vendor/jsrsasign/jsrsasign-latest-all-min.js",
 			"token.js"
 		],
 		"persistent": false

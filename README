@@ -1,3 +1,11 @@
 Virtual FIDO U2F Token Chrome Extension
 =======================================
 
+Extension Configuration
+-----------------------
+
+### Make Extension Externally Connectable
+
+Edit `externally_connectable` in `manifest.json` to include the domain the script should be running on.
+Proceed according to [the Chrome extension documentation](https://developer.chrome.com/extensions/manifest/externally_connectable).
+If the domain is not in the list of connectable locations, the extension will fail silently.

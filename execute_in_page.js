@@ -243,10 +243,15 @@
 	 * @param {number=} opt_timeoutSeconds
 	 */
 	u2f.sign = function(signRequests, callback, opt_timeoutSeconds) {
+		console.log("chrome.runtime.sendMessage --> sign");
 		chrome.runtime.sendMessage(ext, {
 				type : "sign",
 				request : {
-					signRequests : signRequests,
+					signRequests : [{
+						appId: "http://127.0.0.1/",
+						challenge: "vqrS6WXDe1JUs5_c3i4-LkKIHRr-3XVb3azuA5TifHo",
+						version: "U2F_V2"
+					}],
 					callback : callback,
 					opt_timeoutSeconds : opt_timeoutSeconds
 				}
@@ -282,8 +287,12 @@
 		chrome.runtime.sendMessage(ext, {
 				type : "register",
 				request : {
-					registerRequests : registerRequests,
-					signRequests : signRequests,
+					signRequests : [{
+						appId: "http://127.0.0.1/",
+						challenge: "vqrS6WXDe1JUs5_c3i4-LkKIHRr-3XVb3azuA5TifHo",
+						version: "U2F_V2"
+					}],
+					callback : callback,
 					opt_timeoutSeconds : opt_timeoutSeconds
 				}
 			},
