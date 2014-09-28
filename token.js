@@ -168,10 +168,7 @@ var handleRegistration = function () {
 			var challengeSha256 = fullChallengeDigest;	// aka. BROWSER_DATA_ENROLL_SHA256
 			
 			generateKeyPair(applicationSha256, challengeSha256, function(keyPair){
-				generateKeyHandle(applicationSha256, keyPair, function(keyHandle){
-					console.log("keyHandle");
-					console.log(keyHandle);
-					
+				generateKeyHandle(applicationSha256, keyPair, function(keyHandle){					
 					/*
 					 * This key is appropriately constructed. Save it.
 					 */
@@ -189,7 +186,7 @@ var handleRegistration = function () {
 					currentRequest = null;
 					
 					r.sendResponse({
-						nada : "nada"
+						TBD : "TBD"
 					});	
 				});
 			});
@@ -252,7 +249,7 @@ var generateKeyPair = function (applicationSha256, challengeSha256, callback) {
 };
 
 var generateKeyHandle = function (applicationSha256, keyPair, callback) {
-	callback("key_" + new Date().getTime());
+	callback("dummy-key-do-not-trust-" + new Date().getTime());
 };
 
 var addToKeyStore = function (key) {
@@ -272,6 +269,17 @@ var emptykeyStore = function () {
 };
 
 var getKeyStore = function () {
-	console.log("getKeyStore");
 	return JSON.parse(localStorage.getItem(KEY_STORE_NAME));
+};
+
+var getPrivateAttestationKey = function() {
+	return ATTESTATION_KEY.private;
+};
+
+var getPublicAttestationKey = function() {
+	return ATTESTATION_KEY.public;
+};
+
+var getAttestationCertificate = function() {
+	return X509_PEM;
 };

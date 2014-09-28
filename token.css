@@ -119,13 +119,14 @@ a#empty:hover {
 	color: rgb(227, 6, 19);
 }
 
-#keys {
+#keys,
+#meta {
 	padding: 0 1em;
-	max-height: 400px;
 	font-size: .8em;
 	text-align: left;
 }
 
+#meta p,
 #keys p {
 	font-family: monospace;
 	white-space: pre-line;
@@ -141,6 +142,7 @@ a#empty:hover {
 	word-wrap: break-word;
 }
 
+#meta h5,
 #keys h4,
 #keys h5,
 #keys h6 {
@@ -153,4 +155,18 @@ a#empty:hover {
 #keys h6 strong {
 	color: #000;
 	font-weight: bold;
+}
+
+#meta p {
+	text-wrap: unrestricted;
+	word-wrap: break-word;
+}
+
+#meta a {
+	color: #000;
+	text-decoration: none;
+}
+
+#meta a:hover {
+	color: rgb(227, 6, 19);
 }

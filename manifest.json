@@ -10,6 +10,7 @@
 	},
 	"permissions": [
 		"<all_urls>"
+		// "background"
 	],
 	"content_scripts": [
 		{
@@ -34,7 +35,7 @@
 			"vendor/jsrsasign/jsrsasign-latest-all-min.js",
 			"token.js"
 		],
-		"persistent": false
+		"persistent": true
 	},
 	"browser_action": {
 		"default_title": "FIDO U2F Simulation",

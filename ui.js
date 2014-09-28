@@ -11,6 +11,30 @@ $(document).ready(function() {
 		bkg.emptykeyStore();
 	});
 	
+	/*
+	 * Write Keys to UI
+	 */
+	$("#private-attestation-key p").text(bkg.getPrivateAttestationKey());
+	$("#public-attestation-key p").text(bkg.getPublicAttestationKey());
+	$("#attestation-certificate p").text(bkg.getAttestationCertificate());
+	
+	/*
+	 * Attach show/hide handlers
+	 */
+	$("#meta > div a").on("click", function(e) {
+		e.preventDefault();
+		
+		if ($(this).hasClass("show")) {
+			$(this).parent().parent().find("p").show();
+			$(this).removeClass("show");
+			$(this).text("hide");
+		} else {
+			$(this).parent().parent().find("p").hide();
+			$(this).addClass("show");
+			$(this).text("show");
+		}
+	});
+	
 	var updateKeyList = function (keys) {
 		var DELETEABLE_CLASS_NAME = "deleteable";
 		
