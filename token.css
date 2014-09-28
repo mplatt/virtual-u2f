@@ -119,6 +119,14 @@ a#empty:hover {
 	color: rgb(227, 6, 19);
 }
 
+.key {
+	display: block;
+	padding: .5em;
+	background-color: #EEE;
+	border: 1px solid #777;
+	border-radius: 3px;
+}
+
 #keys,
 #meta {
 	padding: 0 1em;

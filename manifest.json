@@ -1,8 +1,9 @@
 {
-	"name": "Virtual FIDO U2F Token Plugin",
+	"name": "Virtual FIDO U2F Token Extension",
 	"description": "This exposes a window.u2f object to Chrome, mimicking the way the standard extension would behave with a hardware token connected.",
 	"author": "Moritz Platt",
 	"version": "0.0.1",
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzO5KxMDzpJ2x3t0BINb0CVHldUvgJYMPrv8KwgPGE+iuUYDHZdPPUwYgtztrUXjkOcMOCfgVkgX/y2djvmR4iXvoo9aSwd2Z41p+eSNvs7o62J+FCLlRI0dYjAAaZu+JOSUq+6POyN9hddq48UJ4Aan47v4WjNzd15kq8gv3+2ETyx4nd8DNUvzWJQW6iFOvMvotVTbhl3BWmZLt9rnntD3AF5F/7DjcXlQTaxtWoVkuW40xp73lAJzitlOHGrvVxQeWR8+qn5NShai3uk9yt8k7OD9WBd/qfiHwRZotElOIaVWQW/e4prs3Y9NIkHHS03gz7pvYzQDkYUID10su/QIDAQAB",
 	"icons": {
 		"16": "assets/icon/icon16.png",
 		"48": "assets/icon/icon48.png",
@@ -23,8 +24,9 @@
 		}
 	],  
 	"web_accessible_resources": [
-		"execute_in_page.js"
+		"api.js"
 	],
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"externally_connectable": {
 		"matches": [
 			"http://127.0.0.1/*"
@@ -32,7 +34,7 @@
 	},
 	"background": {
 		"scripts": [
-			"vendor/jsrsasign/jsrsasign-latest-all-min.js",
+			"vendor/jsrsasign/jsrsasign-4.7.0-all-min.js",
 			"token.js"
 		],
 		"persistent": true
