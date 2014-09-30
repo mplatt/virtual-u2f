@@ -106,6 +106,8 @@
      * @param {number=} opt_timeoutSeconds
      */
     u2f.register = function (registerRequests, signRequests, callback, opt_timeoutSeconds) {
+    	// TODO check for existence of all non-opt parameters
+    	
         /**
          * Whether the call has been answered yet. Either by response or by timeout message.
          * @type {boolean}
@@ -196,9 +198,19 @@
             request.challenge.challenge = originalChallenge;
 
             // the facet id of the caller, i.e., the web origin of the relying party.
-            // (Note: this might be more accurately called ‘facet_id’, but
+            // (Note: this might be more accurately called 'facet_id', but
             // for compatibility with existing implementations within Chrome we keep
             // the legacy name.)
+            //
+            // As per fido-u2f-application-isolation-through-facet-identification-v1.0-rd-20140209.pdf
+            // the facet id is "a platform-specific identifier (URI) for an
+            // application facet".
+            // The specification states that "For the Web, the facet id is the
+            // web origin, written as a URI without a path (e.g.,
+            // 'https://login.paypal.com' (default ports are omitted))."
+            //
+            // Thus, it is appropriate to use the origin of the request as
+            // origin/facet id parameter.
             request.challenge.origin = getOriginFromRequest();
 
             // The Channel ID public key used by this browser to communicate with the

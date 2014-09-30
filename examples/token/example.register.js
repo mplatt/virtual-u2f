@@ -13,7 +13,6 @@ var registrationExample = function() {
 	 */
 	
 	// p. 18 l. 290-291
-	// beginning with 0x04 as per specifications
 	var PUBLIC_ATTESTATION_KEY = '048d617e65c9508e64bcc5673ac82a6799da3c1446682c258c463fffdf58dfd2fa3e6c378b53d795c4a4dffb4199edd7862f23abaf0203b4b8911ba0569994e101';
 	
 	// p. 18 l. 288

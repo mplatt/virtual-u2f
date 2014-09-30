@@ -38,5 +38,6 @@ window.u2f.register([
 	// token that the user has already registered with the RP (see below) and
 	// then call handleRegistrationRequest on a CryptoTokenHandler object."
 }], function (data) {
+    // registration is complete
 	console.log(data);
-}, 20);
+}, 20); // use 20s timeout
