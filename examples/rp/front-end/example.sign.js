@@ -1,7 +1,7 @@
 /**
- * Commented example for a registration call prepared by a relying party (RP).
+ * Commented example for a authentication call prepared by a relying party (RP).
  */
-window.u2f.register([{
+window.u2f.sign([{
     // Version of the protocol that the to-be-registered U2F token must
     // speak. For the version of the protocol described herein, must be
     // "U2F_V2".
@@ -26,14 +26,13 @@ window.u2f.register([{
     // might be more accurately called "relying_party_state", but for
     // compatibility with existing implementations within Chrome we
     // keep the legacy name.)
-    sessionId : "42"
-}], [{
-	// SignData
-	//
-	// "Additionally, it [the RP] should prepare SignData objects for each U2F
-	// token that the user has already registered with the RP (see below) and
-	// then call handleRegistrationRequest on a CryptoTokenHandler object."
+    sessionId : "42",
+
+    // The key handle. This is provided by the relying party, and was obtained
+    // by the relying party during registration.
+    // This happens to be text but any binary data is fine...
+    keyHandle: btoa("dummy_key_handle")
 }], function (data) {
     // registration is complete
-	console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data));
 }, 20); // use 20s timeout

@@ -95,40 +95,44 @@
      */
     u2f.RegisterResponse;
 
-    // High-level JS API
 
+    // High-level JS API
     /**
-     * Dispatches register requests to available U2F tokens. An array of sign
-     * requests identifies already registered tokens.
-     * @param {Array.<u2f.RegisterRequest>} registerRequests
+     * Dispatches an array of sign requests to available U2F tokens.
      * @param {Array.<u2f.SignRequest>} signRequests
-     * @param {function((u2f.Error|u2f.RegisterResponse))} callback
+     * @param {function((u2f.Error|u2f.SignResponse))} callback
      * @param {number=} opt_timeoutSeconds
      */
-    u2f.register = function (registerRequests, signRequests, callback, opt_timeoutSeconds) {
-    	// TODO check for existence of all non-opt parameters
-    	
+    u2f.sign = function(signRequests, callback, opt_timeoutSeconds) {
+        if (typeof signRequests === 'undefined' || typeof callback === 'undefined') {
+            throw new Error("Not all mandatory parameters provided");
+        }
+
         /**
          * Whether the call has been answered yet. Either by response or by timeout message.
          * @type {boolean}
          */
-        var answered;
+        var answered = false;
 
-        if (!originAllowed(registerRequests) || !originAllowed(signRequests)) {
+        if (!originAllowed(signRequests)) {
             //throw new Error("Origin not allowed");
             console.warn("Origin host does not match app_id host.");
         }
 
         /**
+         * Milliseconds to pass before a request times out
+         * @type {number}
+         */
+        var millis = (typeof opt_timeoutSeconds !== 'undefined' ? (opt_timeoutSeconds * 1000) : (u2f.EXTENSION_TIMEOUT_SEC *1000));
+
+        /**
          * @type {{type: (u2f.MessageTypes.U2F_REGISTER_REQUEST|u2f.MessageTypes.U2F_SIGN_REQUEST), signRequests: Array.<u2f.SignRequest>, registerRequests: Array.<u2f.RegisterRequest>, timeoutSeconds: number}}
          */
         var req = {
-            type: u2f.MessageTypes.U2F_REGISTER_REQUEST,
+            type: u2f.MessageTypes.U2F_SIGN_REQUEST,
             signRequests: transformRequestChallenge(signRequests, u2f.MessageTypes.U2F_SIGN_REQUEST),
-            registerRequests: transformRequestChallenge(registerRequests, u2f.MessageTypes.U2F_REGISTER_REQUEST)
+            timeout : millis
         };
-
-        answered = false;
 
         var timeout = setTimeout(function () {
             if (!answered) {
@@ -138,7 +142,63 @@
                     errorMessage: "Request timed out"
                 });
             }
-        }, (typeof opt_timeoutSeconds !== 'undefined' ? (opt_timeoutSeconds * 1000) : (u2f.EXTENSION_TIMEOUT_SEC *1000)));
+        }, millis);
+
+        chrome.runtime.sendMessage(EXTENSION_ID, req, function (response) {
+            if (!answered) {
+                answered = true;
+                callback(response);
+            }
+        });
+    };
+    /**
+     * Dispatches register requests to available U2F tokens. An array of sign
+     * requests identifies already registered tokens.
+     * @param {Array.<u2f.RegisterRequest>} registerRequests
+     * @param {Array.<u2f.SignRequest>} signRequests
+     * @param {function((u2f.Error|u2f.RegisterResponse))} callback
+     * @param {number=} opt_timeoutSeconds
+     */
+    u2f.register = function (registerRequests, signRequests, callback, opt_timeoutSeconds) {
+        if (typeof registerRequests === 'undefined' || typeof signRequests === 'undefined' || typeof callback === 'undefined') {
+            throw new Error("Not all mandatory parameters provided");
+        }
+
+        /**
+         * Whether the call has been answered yet. Either by response or by timeout message.
+         * @type {boolean}
+         */
+        var answered = false;
+
+        if (!originAllowed(registerRequests) || !originAllowed(signRequests)) {
+            //throw new Error("Origin not allowed");
+            console.warn("Origin host does not match app_id host.");
+        }
+
+        /**
+         * Milliseconds to pass before a request times out
+         * @type {number}
+         */
+        var millis = (typeof opt_timeoutSeconds !== 'undefined' ? (opt_timeoutSeconds * 1000) : (u2f.EXTENSION_TIMEOUT_SEC *1000));
+
+        /**
+         * @type {{type: (u2f.MessageTypes.U2F_REGISTER_REQUEST|u2f.MessageTypes.U2F_SIGN_REQUEST), signRequests: Array.<u2f.SignRequest>, registerRequests: Array.<u2f.RegisterRequest>, timeoutSeconds: number}}
+         */
+        var req = {
+            type: u2f.MessageTypes.U2F_REGISTER_REQUEST,
+            registerRequests: transformRequestChallenge(registerRequests, u2f.MessageTypes.U2F_REGISTER_REQUEST),
+            timeout : millis
+        };
+
+        var timeout = setTimeout(function () {
+            if (!answered) {
+                answered = true;
+                callback({
+                    errorCode: u2f.ErrorCodes.TIMEOUT,
+                    errorMessage: "Request timed out"
+                });
+            }
+        }, millis);
 
         chrome.runtime.sendMessage(EXTENSION_ID, req, function (response) {
             if (!answered) {
@@ -179,6 +239,8 @@
     function transformRequestChallenge (requests, type) {
         for (var i = 0; i < requests.length; i++) {
             var request = requests[i];
+            console.log("request");
+            console.log(request);
             var originalChallenge = request.challenge;
             request.challenge = {};
 
@@ -225,6 +287,9 @@
             request.challenge.cid_pubkey = "unused";
 
             requests[i] = request;
+
+            console.log("request2");
+            console.log(request);
         }
 
         return requests;

@@ -29,7 +29,9 @@
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"externally_connectable": {
 		"matches": [
-			"http://127.0.0.1/*"
+            "*://localhost/*",
+            "*://127.0.0.1/*",
+            "*://mplatt.github.io/*"
 		]
 	},
 	"background": {
