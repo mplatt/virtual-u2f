@@ -304,8 +304,9 @@ var handleSignRequest = function (request, sender, sendResponse) {
         var counterHex = counterPadding(counter);
 
         var signature = signHex(getKeyByHandle(b64tohex(getKeyHandleFromRequest(request))).private, getSignSignatureBaseString(applicationIdHash, counterHex, clientDataHash));
-
+        
         var sign = hextob64(USER_PRESENCE_BYTE + counterHex + signature);
+        
         /*
          * fido-u2f-javascript-api-v1.0-rd-20140209.pdf ll.254 - 265
          */
@@ -342,7 +343,7 @@ var handleSignRequest = function (request, sender, sendResponse) {
  * @returns {string}
  */
 var counterPadding = function (num) {
-    return ("0000" + num.toString(16)).substr(-4);
+    return ("00000000" + num.toString(16)).substr(-8);
 }
 
 /**
@@ -510,7 +511,7 @@ var signHex = function (privateKey, message) {
     });
 
     sig.updateHex(message);
-
+    
     return sig.sign();
 };
 
