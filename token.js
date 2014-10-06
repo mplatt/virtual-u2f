@@ -305,7 +305,7 @@ var handleSignRequest = function (request, sender, sendResponse) {
 
         var signature = signHex(getKeyByHandle(b64tohex(getKeyHandleFromRequest(request))).private, getSignSignatureBaseString(applicationIdHash, counterHex, clientDataHash));
 
-        var sign = USER_PRESENCE_BYTE + counterHex + signature;
+        var sign = hextob64(USER_PRESENCE_BYTE + counterHex + signature);
         /*
          * fido-u2f-javascript-api-v1.0-rd-20140209.pdf ll.254 - 265
          */
