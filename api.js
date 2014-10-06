@@ -239,8 +239,6 @@
     function transformRequestChallenge (requests, type) {
         for (var i = 0; i < requests.length; i++) {
             var request = requests[i];
-            console.log("request");
-            console.log(request);
             var originalChallenge = request.challenge;
             request.challenge = {};
 
@@ -287,9 +285,6 @@
             request.challenge.cid_pubkey = "unused";
 
             requests[i] = request;
-
-            console.log("request2");
-            console.log(request);
         }
 
         return requests;
