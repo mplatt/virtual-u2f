@@ -786,7 +786,7 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Cache-Control: no-cache
 
-{"bd":"{\"typ\":\"navigator.id.getAssertion\",\"challenge\":\"Ym9ndXM=\",\"origin\":\"https://mplatt.github.io\",\"cid_pubkey\":\"unused\"}","sign":"0100153045022100ec585dc381bfe8237f32869ed0860caa2912995ad62feee0212c465dc097bfbd02201495b75d96ea00563bcb1ef5e88ee9925f964247ca8bfe26b0a9a65eefa2ac6d","sessionId":"42","app_id":"http://127.0.0.1"}
+{"bd":"{\"typ\":\"navigator.id.getAssertion\",\"challenge\":\"Ym9ndXM=\",\"origin\":\"https://mplatt.github.io\",\"cid_pubkey\":\"unused\"}","sign":"AQAVMEUCIQDsWF3Dgb/oI38yhp7QhgyqKRKZWtYv7uAhLEZdwJe/vQIgFJW3XZbqAFY7yx716I7pkl+WQkfKi/4msKmmXu+irG0=","sessionId":"42","app_id":"http://127.0.0.1"}
 ```
 
 ##### RP Server Side
