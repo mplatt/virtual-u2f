@@ -39,7 +39,7 @@ Configuration
 
 #### Make Extension Externally Connectable
 
-For security reasons, in the Chrome extension system you have to manually specify web pages that can talk to an extension. If the domain is not in the list of connectable locations, the extension will fail silently. By default the extension is configured to only be connectable by connections from `127.0.0.1`, `localhost` and the [demo page](https://mplatt.github.io/virtual-u2f-playground/) at `mplatt.github.io`. To add other locations you need to open `manifest.json` from the extensions folder in a text editor. Locate the following lines:
+For security reasons, in the Chrome extension system you have to manually specify web pages that can talk to an extension. If the domain is not in the list of connectable locations, the extension will fail silently. By default the extension is configured to only be connectable by connections from `127.0.0.1`, `localhost` and `mplatt.github.io` (with the latter being included for historical reasons only). To add other locations you need to open `manifest.json` from the extensions folder in a text editor. Locate the following lines:
 
 ```JavaScript
 	"externally_connectable": {
