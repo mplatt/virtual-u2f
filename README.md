@@ -1,7 +1,9 @@
 Virtual FIDO U2F Token Chrome Extension
 =======================================
 
-A full JavaScript implementation of a virtual [FIDO U2F](http://fidoalliance.org/specifications/download/) token and a JavaScript API to conveniently access it.
+**Abandoned**—This project is no longer maintained or updated.
+
+A JavaScript implementation of a virtual [FIDO U2F](http://fidoalliance.org/specifications/download/) token and a JavaScript API to conveniently access it.
 
 This extension is inspired by Google's [u2f-chrome-extension](https://github.com/google/u2f-ref-code/tree/master/u2f-chrome-extension) but does not require a hardware token.
 Google's u2f-chrome-extension is much more elaborate and should be preferred should you have access to a hardware token.
@@ -9,7 +11,6 @@ This extension only serves as a last resort for those who require to use a virtu
 
 Disclaimer
 ----------
-
 I have developed this extension as a quick emergency solution because I wanted to work with FIDO U2F technology in my thesis but I was not able to obtain a hardware token that worked as expected.
 The extension is based on the FIDO Alliance Universal 2nd Factor (U2F) specification draft as of 2014-02-09, still it does not completely implement it (see *To Do*) and it might even violate it.
 Furthermore, since this draft is is not intended to be a basis for any implementations, this extension might not comply with later editions of the specifications.
